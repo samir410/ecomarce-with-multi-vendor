@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Backend\BrandController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,6 +55,15 @@ Route::middleware('auth','role:vendor')->controller(VendorController::class)->pr
     Route::post('/update/password','VendorUpdatePassword')->name('vendor.update.password');
 });
 
+
+Route::middleware('auth','role:admin')->controller(BrandController::class)->group(function () {
+    Route::get('/all/brand','index')->name('all.brand');
+    Route::get('/add/brand','add_brand_page')->name('add.brand');
+    Route::post('/store/brand','create')->name('store.brand');
+    Route::get('/edit/brand/{id}' , 'edit')->name('edit.brand');
+    Route::post('/update/brand' , 'UpdateBrand')->name('update.brand');
+    Route::get('/delete/brand/{id}','destroy')->name('delete.brand');
+});
 
 //////////////////////////////////////////////////////frontend routes//////////////////////////////////////
 Route::controller(FrontendController::class)->group(function () {
