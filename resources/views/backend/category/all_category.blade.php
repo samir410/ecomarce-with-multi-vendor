@@ -1,6 +1,6 @@
 @extends('admin.admin_dashboard')
 @section('title')
-Add brand
+All category
 @endsection
 @section('content')
 
@@ -15,12 +15,12 @@ Add brand
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Brand List</li>
+                        <li class="breadcrumb-item active" aria-current="page">Category List</li>
                     </ol>
                 </nav>
             </div>
             <div class="ms-auto">
-                <a href="{{ route('add.brand') }}" class="btn btn-outline-dark">Add Brand</a>
+                <a href="{{ route('add.category') }}" class="btn btn-outline-dark">Add Category </a>
          
             </div>
         </div>
@@ -34,21 +34,21 @@ Add brand
                         <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Brand name</th>
-                                <th>Brand Image</th>
+                                <th>Category name</th>
+                                <th>Category Image</th>
                                 <th>Action</th>
                            
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($brand as $key => $item)	
+                        @foreach($category as $key => $item)	
                             <tr class="align-bottom">
                                 <td>{{ $key }}</td>
-                                <td>{{ $item->brand_name }}</td>
-                                <td> <img src="{{ asset($item->brand_image) }}" style="width: 70px; height:40px;" >  </td>
+                                <td>{{ $item->category_name }}</td>
+                                <td> <img src="{{ asset($item->category_image) }}" style="width: 70px; height:40px;" >  </td>
                                 <td>
-                                    <a href="{{ route('edit.brand',$item->id) }}" class="btn btn-outline-primary glyphicon glyphicon-pencil">Edit</a>
-                                    <a href="{{ route('delete.brand',$item->id) }}" class="btn btn-outline-danger" id="delete">Delete</a>
+                                    <a href="{{ route('edit.category',$item->id) }}" class="btn btn-outline-primary glyphicon glyphicon-pencil">Edit</a>
+                                    <a href="{{ route('delete.category',$item->id) }}" class="btn btn-outline-danger" id="delete">Delete</a>
                                 </td>
                                
                             </tr>
@@ -59,10 +59,10 @@ Add brand
                         <tfoot>
                             <tr>
                            
-                                    <th>SL</th>
-                                    <th>Brand name</th>
-                                    <th>Brand Image</th>
-                                    <th>Action</th>
+                                <th>SL</th>
+                                <th>Category name</th>
+                                <th>Category Image</th>
+                                <th>Action</th>
                                
                          
                             </tr>

@@ -6,6 +6,8 @@ use App\Http\Controllers\VendorController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\BrandController;
+use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -24,9 +26,16 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/user/register', [UserController::class,'UserRegister'])->name('user.register');
+Route::get('/user/login', [UserController::class,'UserLogin'])->name('user.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
+Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -56,14 +65,7 @@ Route::middleware('auth','role:vendor')->controller(VendorController::class)->pr
 });
 
 
-Route::middleware('auth','role:admin')->controller(BrandController::class)->group(function () {
-    Route::get('/all/brand','index')->name('all.brand');
-    Route::get('/add/brand','add_brand_page')->name('add.brand');
-    Route::post('/store/brand','create')->name('store.brand');
-    Route::get('/edit/brand/{id}' , 'edit')->name('edit.brand');
-    Route::post('/update/brand' , 'UpdateBrand')->name('update.brand');
-    Route::get('/delete/brand/{id}','destroy')->name('delete.brand');
-});
+
 
 //////////////////////////////////////////////////////frontend routes//////////////////////////////////////
 Route::controller(FrontendController::class)->group(function () {
@@ -80,11 +82,38 @@ Route::middleware('auth')->controller(UserController::class)->group(function () 
 });
 
 
+// \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\Brand////////////////////////////////////////////////////////////
+Route::middleware('auth','role:admin')->controller(BrandController::class)->group(function () {
+    Route::get('/all/brand','index')->name('all.brand');
+    Route::get('/add/brand','add_brand_page')->name('add.brand');
+    Route::post('/store/brand','create')->name('store.brand');
+    Route::get('/edit/brand/{id}' , 'edit')->name('edit.brand');
+    Route::post('/update/brand' , 'UpdateBrand')->name('update.brand');
+    Route::get('/delete/brand/{id}','destroy')->name('delete.brand');
+});
 
-Route::get('/user/register', [UserController::class,'UserRegister'])->name('user.register');
-Route::get('/user/login', [UserController::class,'UserLogin'])->name('user.login');
-Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
-Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login');
+// /////////////////////////////Category///////////////////////////////////////////////////////////
+Route::middleware('auth','role:admin')->controller(CategoryController::class)->group(function () {
+    Route::get('/all/category','index')->name('all.category');
+    Route::get('/add/category','create')->name('add.category');
+    Route::post('/store/category','store')->name('store.category');
+    Route::get('/edit/category/{id}' , 'edit')->name('edit.category');
+    Route::post('/update/category' , 'update')->name('update.category');
+    Route::get('/delete/category/{id}','destroy')->name('delete.category');
+});
+
+// /////////////////////////////Category///////////////////////////////////////////////////////////
+Route::middleware('auth','role:admin')->controller(SubCategoryController::class)->group(function () {
+    Route::get('/all/subcategory','index')->name('all.subcategory');
+    Route::get('/add/subcategory','create')->name('add.subcategory');
+    Route::post('/store/subcategory','store')->name('store.subcategory');
+    Route::get('/edit/subcategory/{id}' , 'edit')->name('edit.subcategory');
+    Route::post('/update/subcategory' , 'update')->name('update.subcategory');
+    Route::get('/delete/subcategory/{id}','destroy')->name('delete.subcategory');
+});
+
+
+
 
 
 require __DIR__.'/auth.php';
