@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\SliderBannerController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -111,7 +112,23 @@ Route::middleware('auth','role:admin')->controller(SubCategoryController::class)
     Route::post('/update/subcategory' , 'update')->name('update.subcategory');
     Route::get('/delete/subcategory/{id}','destroy')->name('delete.subcategory');
 });
+// /////////////////////////////Slider---Banner///////////////////////////////////////////////////////////
+Route::middleware('auth','role:admin')->controller(SliderBannerController::class)->group(function () {
+    Route::get('/all/slider','slider_index')->name('all.slider');
+    Route::get('/add/slider','slider_create')->name('add.slider');
+    Route::post('/store/slider','slider_store')->name('store.slider');
+    Route::get('/edit/slider/{id}' , 'slider_edit')->name('edit.slider');
+    Route::post('/update/slider' , 'slider_update')->name('update.slider');
+    Route::get('/delete/slider/{id}','slider_destroy')->name('delete.slider');
 
+                        // banner section///
+    Route::get('/all/banner','banner_index')->name('all.banner');
+    Route::get('/add/banner','banner_create')->name('add.banner');
+    Route::post('/store/banner','banner_store')->name('store.banner');
+    Route::get('/edit/banner/{id}' , 'banner_edit')->name('edit.banner');
+    Route::post('/update/banner' , 'banner_update')->name('update.banner');
+    Route::get('/delete/banner/{id}','banner_destroy')->name('delete.banner');
+});
 
 
 
