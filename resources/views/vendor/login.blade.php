@@ -33,10 +33,11 @@
 						</div>
 						<div class="card">
 							<div class="card-body">
+					
 								<div class="border p-4 rounded">
 									<div class="text-center">
 										<h3 class=""> Vendor Log in</h3>
-										<p>Don't have an account yet? <a href="authentication-signup.html">Sign up here</a>
+										<p>Don't have an account yet? <a href="{{ route('become.vendor') }}">Sign up here</a>
 										</p>
 									</div>
 									<div class="d-grid">
@@ -50,6 +51,15 @@
 										<hr/>
 									</div>
 									<div class="form-body">
+										@if ($errors->any())
+										<div class="alert alert-danger">
+										  <ul>
+											 @foreach ($errors->all() as $error)
+											   <li>{{ $error }}</li>
+											 @endforeach
+										  </ul>
+										 </div>
+										@endif
 										<form class="row g-3" method="post" action="{{ route('login') }}">
                                             @csrf
 											<div class="col-12">

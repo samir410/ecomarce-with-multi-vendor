@@ -36,6 +36,8 @@ Route::get('/user/register', [UserController::class,'UserRegister'])->name('user
 Route::get('/user/login', [UserController::class,'UserLogin'])->name('user.login');
 Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.login');
 Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login');
+Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
+Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->name('vendor.register');
 
 
 Route::middleware('auth')->group(function () {
@@ -53,6 +55,16 @@ Route::middleware('auth','role:admin')->controller(AdminController::class)->pref
     Route::get('/profile','admin_profile')->name('admin.profile');
     Route::post('/store/profile','store_profile')->name('admin.store.profile');
 });
+Route::controller(AdminController::class)->group(function(){
+    Route::get('/inactive/vendor' , 'InactiveVendor')->name('inactive.vendor');
+    Route::get('/active/vendor' , 'ActiveVendor')->name('active.vendor');
+    Route::get('/all/vendor' , 'AllVendor')->name('all.vendor');
+    Route::get('/vendor/details/{id}' , 'VendorDetails')->name('vendor.details');
+    Route::post('/active/vendor/approve' , 'ActiveVendorApprove')->name('active.vendor.approve');
+    Route::post('/inactive/vendor/approve' , 'InActiveVendorApprove')->name('inactive.vendor.approve');
+
+});
+
 
 
 //////////////////////////////////////////////vendor routes/////////////////////////////////////////////////////

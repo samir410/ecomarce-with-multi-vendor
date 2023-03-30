@@ -108,5 +108,44 @@ class VendorController extends Controller
     
      
     }
+
+    
+    public function BecomeVendor(){
+        return view('vendor.includes.vendor_register');
+    } // End Mehtod 
+
+    public function VendorRegister(Request $request) {
+
+        $validatedData = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed'],
+            'phone' => ['required', 'string', 'max:20'],
+            'vendor_join' => 'required|digits:4|integer|min:2010|max:'.(date('Y')+1),
+
+        ]);
+        
+        
+            $user = User::create([ 
+                'name' => $request->name,
+                'username' => $request->username,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'vendor_join' => $request->vendor_join,
+                'password' => Hash::make($request->password),
+                'role' => 'vendor',
+                'status' => 'inactive',
+            ]);
+        
+            $notification = array(
+                'message' => 'Vendor Registered Successfully',
+                'alert-type' => 'success'
+            );
+        
+            return redirect()->route('vendor.login')->with($notification);
+    
+
+    }// End Mehtod
+
     
 }

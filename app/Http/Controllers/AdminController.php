@@ -32,13 +32,13 @@ class AdminController extends Controller
     return redirect('/admin/login');
   }
 
- public function ChangePassword(){
+  public function ChangePassword(){
 
-        return view('admin.change_password');
+    return view('admin.change_password');
 
-    }// End Method
+  }// End Method
 
- public function AdminUpdatePassword(Request $request){
+  public function AdminUpdatePassword(Request $request){
 
       $validateData = $request->validate([
           'oldpassword' => 'required',
@@ -107,6 +107,63 @@ class AdminController extends Controller
 
  
   }
+
+  public function InactiveVendor(){
+    $inActiveVendor = User::where('status','inactive')->where('role','vendor')->latest()->get();
+    return view('backend.vendor.inactive_vendor',compact('inActiveVendor'));
+
+  }// End Mehtod 
+
+  public function ActiveVendor(){
+    $inActiveVendor = User::where('status','active')->where('role','vendor')->latest()->get();
+     return view('backend.vendor.inactive_vendor',compact('inActiveVendor'));
+
+  }// End Mehtod 
+  public function AllVendor(){
+     $Vendor = User::latest()->get();
+     return view('backend.vendor.all_vendor',compact('Vendor'));
+
+  }// End Mehtod 
+  public function VendorDetails($id){
+
+    $VendorDetails = User::findOrFail($id);
+    return view('backend.vendor.vendor_details',compact('VendorDetails'));
+ 
+  }// End Mehtod 
+  public function ActiveVendorApprove(Request $request){
+   
+    $verdor_id = $request->id;
+  
+    $user = User::findOrFail($verdor_id)->update([
+        'status' => 'active',
+    ]);
+
+    $notification = array(
+        'message' => 'Vendor Active Successfully',
+        'alert-type' => 'success'
+    );
+
+    return redirect()->route('active.vendor')->with($notification);
+
+  }// End Mehtod 
+
+  public function InActiveVendorApprove(Request $request){
+
+    $verdor_id = $request->id;
+ 
+    $user = User::findOrFail($verdor_id)->update([
+        'status' => 'inactive',
+    ]);
+
+    $notification = array(
+        'message' => 'Vendor InActive Successfully',
+        'alert-type' => 'success'
+    );
+
+    return redirect()->route('inactive.vendor')->with($notification);
+
+  }// End Mehtod 
+
 
  
 }
