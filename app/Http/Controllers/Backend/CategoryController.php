@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use Image;
 
 class CategoryController extends Controller
@@ -16,8 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = category::latest()-> get();
-        return view('backend.category.all_category',compact('category'));
+        $category = category::latest()->get();
+
+        return view('backend.category.all_category', compact('category'));
     }
 
     /**
@@ -33,7 +34,6 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,27 +41,27 @@ class CategoryController extends Controller
         $validatedData = $request->validate([
             'category_name' => 'required',
             'category_image' => 'required',
-          
+
         ]);
-      if ($request->input('category_name')) {
-         $image = $request->file('category_image');
-         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-         Image::make($image)->resize(300,300)->save('upload/category/'.$name_gen);
-         $save_url = 'upload/category/'.$name_gen;
+        if ($request->input('category_name')) {
+            $image = $request->file('category_image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save('upload/category/'.$name_gen);
+            $save_url = 'upload/category/'.$name_gen;
 
-         Category::insert([
-            'category_name' => $request->category_name,
-            'category_slug' => strtolower(str_replace(' ', '-',$request->category_name)),
-            'category_image' => $save_url, 
-         ]);
+            Category::insert([
+                'category_name' => $request->category_name,
+                'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
+                'category_image' => $save_url,
+            ]);
 
-         $notification = array(
-            'message' => 'Category Inserted Successfully',
-            'alert-type' => 'success'
-         );
+            $notification = [
+                'message' => 'Category Inserted Successfully',
+                'alert-type' => 'success',
+            ];
 
-        return redirect()->route('all.category')->with($notification); 
-      }
+            return redirect()->route('all.category')->with($notification);
+        }
     }
 
     /**
@@ -84,13 +84,13 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('backend.category.category_edit',compact('category'));
+
+        return view('backend.category.category_edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -100,43 +100,39 @@ class CategoryController extends Controller
         $old_img = $request->old_image;
 
         if ($request->file('category_image')) {
+            $image = $request->file('category_image');
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            Image::make($image)->resize(300, 300)->save('upload/category/'.$name_gen);
+            $save_url = 'upload/category/'.$name_gen;
 
-        $image = $request->file('category_image');
-        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(300,300)->save('upload/category/'.$name_gen);
-        $save_url = 'upload/category/'.$name_gen;
+            if (file_exists($old_img)) {
+                unlink($old_img);
+            }
 
-        if (file_exists($old_img)) {
-           unlink($old_img);
-        }
+            Category::findOrFail($category_id)->update([
+                'category_name' => $request->category_name,
+                'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
+                'category_image' => $save_url,
+            ]);
 
-        Category::findOrFail($category_id)->update([
-            'category_name' => $request->category_name,
-            'category_slug' => strtolower(str_replace(' ', '-',$request->category_name)),
-            'category_image' => $save_url, 
-        ]);
+            $notification = [
+                'message' => 'category Updated with image Successfully',
+                'alert-type' => 'success',
+            ];
 
-       $notification = array(
-            'message' => 'category Updated with image Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.category')->with($notification); 
-
+            return redirect()->route('all.category')->with($notification);
         } else {
+            Category::findOrFail($category_id)->update([
+                'category_name' => $request->category_name,
+                'category_slug' => strtolower(str_replace(' ', '-', $request->brand_name)),
+            ]);
 
-             Category::findOrFail($category_id)->update([
-            'category_name' => $request->category_name,
-            'category_slug' => strtolower(str_replace(' ', '-',$request->brand_name)), 
-        ]);
+            $notification = [
+                'message' => 'category Updated without image Successfully',
+                'alert-type' => 'success',
+            ];
 
-       $notification = array(
-            'message' => 'category Updated without image Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.category')->with($notification); 
-
+            return redirect()->route('all.category')->with($notification);
         } // end else
     }
 
@@ -152,10 +148,11 @@ class CategoryController extends Controller
         $img = $category->category_image;
         unlink($img);
         $category->delete();
-        $notification = array(
-            'message' => 'Category deleted', 
-            'alert-type' => 'success'
-        );
+        $notification = [
+            'message' => 'Category deleted',
+            'alert-type' => 'success',
+        ];
+
         return redirect()->back()->with($notification);
     }
 }

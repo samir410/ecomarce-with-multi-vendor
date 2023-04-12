@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Providers\RouteServiceProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,20 +27,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
-        $notification = array(
-            'message' => 'Login Successfully', 
-            'alert-type' => 'success'
-        );
-        $url ='';
-        if ($request->user()->role==='admin') {
-            $url ='/admin/dashboard';
+        $notification = [
+            'message' => 'Login Successfully',
+            'alert-type' => 'success',
+        ];
+        $url = '';
+        if ($request->user()->role === 'admin') {
+            $url = '/admin/dashboard';
+        } elseif ($request->user()->role === 'vendor') {
+            $url = '/vendor/dashboard';
+        } elseif ($request->user()->role === 'user') {
+            $url = '/user/profile';
         }
-        elseif($request->user()->role==='vendor') {
-            $url ='/vendor/dashboard';
-        }
-        elseif($request->user()->role==='user') {
-            $url ='/user/profile';
-        }
+
         return redirect()->intended($url)->with($notification);
     }
 

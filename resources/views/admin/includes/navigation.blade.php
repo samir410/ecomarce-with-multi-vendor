@@ -55,6 +55,7 @@
        
         </ul>
     </li>
+
     <li>
         <a href="javascript:;" class="has-arrow">
             <div class="parent-icon"><i class="bx bx-category"></i>
@@ -88,6 +89,40 @@
        
         </ul>
     </li>
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>
+            <div class="menu-title">Manage Product</div>
+        </a>
+        <ul>
+            <li>
+                <a href="{{ route('all.product') }}"><i class="bx bx-right-arrow-alt"></i>All product</a>
+           </li>
+           <li> 
+               <a href="{{ route('add.product') }}"><i class="bx bx-right-arrow-alt"></i>Add product</a>
+           </li>
+        
+         
+       
+        </ul>
+    </li>
+    
+    <li>
+        <a href="javascript:;" class="has-arrow">
+            <div class="parent-icon"><i class="bx bx-category"></i>
+            </div>-
+            <div class="menu-title">Coupon System</div>
+        </a>
+        <ul>
+            <li> <a href="{{ route('all.cupon') }}"><i class="bx bx-right-arrow-alt"></i>All Coupon</a>
+            </li>
+            <li> <a href="{{ route('add.cupon') }}"><i class="bx bx-right-arrow-alt"></i>Add Coupon</a>
+            </li>
+
+        </ul>
+    </li>
+
     <li class="menu-label">UI Elements</li>
     <li>
         <a href="javascript:;" class="has-arrow">
@@ -106,6 +141,9 @@
             </li>
         </ul>
     </li>
+
+
+    
 
     <li>
         <a class="has-arrow" href="javascript:;">
