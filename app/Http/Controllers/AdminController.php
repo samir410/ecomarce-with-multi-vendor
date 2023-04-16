@@ -123,7 +123,7 @@ class AdminController extends Controller
 // End Mehtod
     public function AllVendor()
     {
-        $Vendor = User::latest()->get();
+        $Vendor = User::where('role','vendor')->latest()->get()->all();
 
         return view('backend.vendor.all_vendor', compact('Vendor'));
     }

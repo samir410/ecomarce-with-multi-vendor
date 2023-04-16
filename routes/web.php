@@ -77,6 +77,9 @@ Route::middleware('auth', 'role:vendor')->controller(VendorController::class)->p
 //////////////////////////////////////////////////////frontend routes//////////////////////////////////////
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
+    Route::get('/all/vendorlist', 'All_Vendor')->name('all.vendorlist');
+    Route::get('/vendor/details/{id}','VendorDetails')->name('vendor.details');
+
 });
 
 //////////////////////////////////////////////////////User routes//////////////////////////////////////
@@ -147,7 +150,7 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/update/product', 'UpdateProduct')->name('update.product');
     Route::post('/update/product/thambnail', 'UpdateProductThambnail')->name('update.product.thambnail');
     Route::post('/update/product/multiimage', 'UpdateProductMultiimage')->name('update.product.multiimage');
-    Route::get('/product/multiimg/delete/{id}' , 'MulitImageDelelte')->name('product.multiimg.delete');
+    Route::get('/product/multiimg/delete/{id}', 'MulitImageDelelte')->name('product.multiimg.delete');
 });
 
 Route::middleware('auth', 'role:admin')->controller(CuponController::class)->group(function () {

@@ -164,8 +164,8 @@ class ProductController extends Controller
         $categories = Category::latest()->get();
         $subcategory = SubCategory::latest()->get();
         $products = Product::findOrFail($id);
-        $multiImgs = MultiImg::where('product_id',$id)->get();
-        
+        $multiImgs = MultiImg::where('product_id', $id)->get();
+
         return view('backend.product.product_edit', compact('brands', 'categories', 'activeVendor', 'products', 'subcategory', 'multiImgs'));
     }// End Method
 
@@ -265,17 +265,18 @@ class ProductController extends Controller
 
         return redirect()->back()->with($notification);
     }// End Meth
-    
-    public function MulitImageDelelte($id){
+
+    public function MulitImageDelelte($id)
+    {
         $oldImg = MultiImg::findOrFail($id);
         unlink($oldImg->photo_name);
 
         MultiImg::findOrFail($id)->delete();
 
-        $notification = array(
+        $notification = [
             'message' => 'Product Multi Image Deleted Successfully',
-            'alert-type' => 'success'
-        );
+            'alert-type' => 'success',
+        ];
 
         return redirect()->back()->with($notification);
     }
