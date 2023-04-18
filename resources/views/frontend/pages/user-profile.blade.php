@@ -47,7 +47,7 @@ User profile page
                                 <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h3 class="mb-0">Hello Rosie!</h3>
+                                            <h3 class="mb-0">Hello {{ $userData->name }}</h3>
                                         </div>
                                         <div class="card-body">
                                             <p>
@@ -136,16 +136,13 @@ User profile page
                                                 </div>
                                                 <div class="card-body">
                                                     <address>
-                                                        3522 Interstate<br />
-                                                        75 Business Spur,<br />
-                                                        Sault Ste. <br />Marie, MI 49783
+                                                      {{ $userData->address }}
                                                     </address>
-                                                    <p>New York</p>
-                                                    <a href="#" class="btn-small">Edit</a>
+                                   
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
+                                        {{-- <div class="col-lg-6">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h5 class="mb-0">Shipping Address</h5>
@@ -159,7 +156,7 @@ User profile page
                                                     <a href="#" class="btn-small">Edit</a>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
@@ -178,7 +175,7 @@ User profile page
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Display Name <span class="required">*</span></label>
-                                                        <input required="" class="form-control" id="username" value="{{ $userData->username }}" name="username" type="text" disabled/>
+                                                        <input required="" class="form-control" id="username" value="{{ $userData->username }}" name="username" type="text" />
                                                     </div>
                                                     <div class="form-group col-md-12">
                                                         <label>Email Address <span class="required">*</span></label>

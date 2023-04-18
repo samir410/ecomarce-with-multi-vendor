@@ -12,6 +12,9 @@
 	<script src="{{ asset('backend/assets/plugins/jquery-knob/excanvas.js')}}"></script>
 	<script src="{{ asset('backend/assets/plugins/jquery-knob/jquery.knob.js')}}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+	<script src="{{ asset('backend/assets/js/bootstrap.bundle.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+     <script src="{{ asset('backend/assets/js/code.js') }}"></script>
 	<script>
 		@if(Session::has('message'))
 		var type = "{{ Session::get('alert-type','info') }}"
@@ -30,7 +33,7 @@
 		   break; 
 		}
 		@endif 
-	   </script>
+	</script>
 
 	  <script>
 		  $(function() {
@@ -40,3 +43,19 @@
 	  <script src="{{ asset('backend/assets/js/index.js')}}"></script>
 	<!--app JS-->
 	<script src="{{ asset('backend/assets/js/app.js')}}"></script>
+	<!--Datatable-->
+<script src="{{ asset('backend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		  } );
+</script>
+<script src="{{ asset('backend/assets/plugins/input-tags/js/tagsinput.js')}}"></script>
+<script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+<script>
+	tinymce.init({
+	  selector: '#mytextarea'
+	});
+</script>
+<!--Datatable-->

@@ -12,7 +12,7 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="{{ asset('frontend/image/x-icon" href="assets/imgs/theme/favicon.svg')}}" />
+    <link rel="shortcut icon" type="" href="{{ ('frontend/assets/imgs/theme/favicon.svg')}}" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css')}}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3')}}" />
@@ -35,7 +35,7 @@
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg')}}" alt="logo" /></a>
+                    <a href="{{ route('homepage') }}"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg')}}" alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">

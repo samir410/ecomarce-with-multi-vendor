@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderBannerController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
@@ -139,7 +140,7 @@ Route::middleware('auth', 'role:admin')->controller(SliderBannerController::clas
 });
 
 /////////////////////////////////////////product //////////////////////////////
-Route::controller(ProductController::class)->group(function () {
+Route::middleware('auth', 'role:admin')->controller(ProductController::class)->group(function () {
     Route::get('/all/product', 'AllProduct')->name('all.product');
     Route::get('/add/product', 'AddProduct')->name('add.product');
     Route::post('/store/product', 'StoreProduct')->name('store.product');
@@ -152,6 +153,22 @@ Route::controller(ProductController::class)->group(function () {
     Route::post('/update/product/multiimage', 'UpdateProductMultiimage')->name('update.product.multiimage');
     Route::get('/product/multiimg/delete/{id}', 'MulitImageDelelte')->name('product.multiimg.delete');
 });
+Route::middleware('auth', 'role:vendor')->controller(VendorProductController::class)->prefix('/vendor')->group(function () {
+    Route::get('/all/product', 'AllProduct')->name('vendor.all.product');
+    Route::get('/add/product', 'AddProduct')->name('vendor.add.product');
+    Route::get('/subcategory/ajax/{category_id}' , 'VendorGetSubCategory');
+    Route::post('/store/product', 'StoreProduct')->name('vendor.store.product');
+    Route::get('/product/inactive/{id}', 'ProductInactive')->name('vendor.product.inactive');
+    Route::get('/product/active/{id}', 'ProductActive')->name('vendor.product.active');
+    Route::get('/delete/product/{id}', 'ProductDelete')->name('vendor.delete.product');
+    
+    Route::get('/edit/product/{id}', 'EditProduct')->name('vendor.edit.product');
+    Route::post('/update/product', 'UpdateProduct')->name('vendor.update.product');
+    Route::post('/update/product/thambnail', 'UpdateProductThambnail')->name('vendor.update.product.thambnail');
+    Route::post('/update/product/multiimage', 'UpdateProductMultiimage')->name('vendor.update.product.multiimage');
+    Route::get('/product/multiimg/delete/{id}', 'MulitImageDelelte')->name('vendor.product.multiimg.delete');
+});
+
 
 Route::middleware('auth', 'role:admin')->controller(CuponController::class)->group(function () {
     Route::get('/all/cupon', 'index')->name('all.cupon');

@@ -32,7 +32,7 @@
             </li>
         </ul>
     </li>
-    @if($status === 'active'){
+    @if($status === 'active')
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="bx bx-category"></i>
@@ -40,12 +40,15 @@
                 <div class="menu-title">Product management</div>
             </a>
             <ul>
-                <li> <a href="app-emailbox.html"><i class="bx bx-right-arrow-alt"></i>Email</a>
-                </li>
-                <li> <a href="app-chat-box.html"><i class="bx bx-right-arrow-alt"></i>Chat Box</a>
+                <li>
+                    <a href="{{ route('vendor.all.product') }}"><i class="bx bx-right-arrow-alt"></i>All product</a>
+               </li>
+               <li> 
+                   <a href="{{ route('vendor.add.product') }}"><i class="bx bx-right-arrow-alt"></i>Add product</a>
+               </li>
             </ul>
         </li>
-    }
+    
     @else
  
     @endif

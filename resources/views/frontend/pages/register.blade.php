@@ -31,6 +31,7 @@ User register page
                                         <div class="form-group">
                                             <input type="text" id ="name" required="" name="name" placeholder="Username" />
                                         </div>
+                                   
                                         <div class="form-group">
                                             <input type="text" id ="email" required="" name="email" placeholder="Email" />
                                         </div>

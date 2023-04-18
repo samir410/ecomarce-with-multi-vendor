@@ -20,5 +20,14 @@
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css')}}" />
+	<link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css') }}" />
+	<link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}" />
+
+<!-- DataTable -->
+	<link href="{{ asset('backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css') }}" rel="stylesheet" />
+<!-- DataTable-->
+	 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+	 <link href="{{ asset('backend/assets/plugins/input-tags/css/tagsinput.css') }}" rel="stylesheet" />
+
 	<title>Rukada - Responsive Bootstrap 5 Admin Template</title>
 </head>
