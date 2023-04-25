@@ -80,7 +80,11 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
     Route::get('/all/vendorlist', 'All_Vendor')->name('all.vendorlist');
     Route::get('/vendor/details/{id}','VendorDetails')->name('vendor.details');
-
+    Route::post('/product/search','ProductSearch')->name('product.search');
+    Route::post('/search-product' , 'SearchProduct');
+    Route::get('product/details/{id}/{slug}','ProductDetails'); 
+    Route::get('/product/category/{id}/{slug}', 'CatWiseProduct');
+    Route::get('/product/subcategory/{id}/{slug}', 'SubCatWiseProduct');
 });
 
 //////////////////////////////////////////////////////User routes//////////////////////////////////////

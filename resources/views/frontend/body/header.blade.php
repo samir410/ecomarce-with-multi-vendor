@@ -61,7 +61,8 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
+                        <form  action="{{ route('product.search') }}" method="post">
+                            @csrf
                             <select class="select-active">
                                 <option>All Categories</option>
                                 <option>Milks and Dairies</option>
@@ -75,7 +76,8 @@
                                 <option>Noodles & Rice</option>
                                 <option>Ice cream</option>
                             </select>
-                            <input type="text" placeholder="Search for items..." />
+                            <input onfocus="search_result_show()" onblur="search_result_hide()" name="search" id="search" placeholder="Search for items..." />
+                            <div id="searchProducts"></div>
                         </form>
                     </div>
                     <div class="header-action-right">
@@ -202,7 +204,28 @@
 
 
 
-
+    <style>
+        #searchProducts{
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #ffffff;
+            z-index: 999;
+            border-radius: 8px;
+            margin-top: 5px;
+        }
+    </style>
+    
+    <script>
+        function search_result_show(){
+            $("#searchProducts").slideDown();
+        }
+        function search_result_hide(){
+            $("#searchProducts").slideUp();
+        }
+    </script>
+    
 
 
     @php
@@ -227,7 +250,7 @@
                                    @foreach ($cat as $key=>$data )
                                     <li>
     
-                                        <a href="shop-grid-right.html"> <img src="{{ asset( $data->category_image ) }}" alt="" />{{ $data->category_name }}</a>
+                                        <a href="{{ url('product/category/'.$data->id.'/'.$data->category_slug) }}"> <img src="{{ asset( $data->category_image ) }}" alt="" />{{ $data->category_name }}</a>
                                     </li>   
                                    @endforeach 
                                    
@@ -277,7 +300,7 @@
                             
                                    @foreach($categories as $category)    
                                     <li>
-                                        <a href="#">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
+                                        <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
                             
                                 @php 
                                  $subcategories = App\Models\SubCategory::where('category_id',$category->id)->orderBy('subcategory_name','ASC')->get();
@@ -285,7 +308,7 @@
                             
                                         <ul class="sub-menu">
                                             @foreach($subcategories as $subcategory)   
-                                                <li><a href="vendors-grid.html">{{ $subcategory->subcategory_name }}</a></li>
+                                                <li><a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug) }}">{{ $subcategory->subcategory_name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>

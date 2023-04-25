@@ -21,9 +21,9 @@ $categories = App\Models\Category::orderBy('category_name','ASC')->limit(6)->get
                 <div class="card-2 bg-9 wow animate__animated animate__fadeInUp" data-wow-delay=".1s">
        
                     <figure class="img-hover-scale overflow-hidden">
-                        <a href="shop-grid-right.html"><img src="{{ asset($data->category_image)}}" alt="" /></a>
+                        <a href="{{ url('product/category/'.$data->id.'/'.$data->category_slug) }}"><img src="{{ asset($data->category_image)}}" alt="" /></a>
                     </figure>
-                    <h6><a href="shop-grid-right.html">{{ $data->category_name }}</a></h6>
+                    <h6><a href="{{ url('product/category/'.$data->id.'/'.$data->category_slug) }}">{{ $data->category_name }}</a></h6>
                     @php
                      $products = App\Models\Product::where('category_id',$data->id)->get();  
                     @endphp
