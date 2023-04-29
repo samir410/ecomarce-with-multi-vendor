@@ -5,9 +5,9 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CuponController;
 use App\Http\Controllers\Backend\ProductController;
-use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderBannerController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -79,12 +79,13 @@ Route::middleware('auth', 'role:vendor')->controller(VendorController::class)->p
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('homepage');
     Route::get('/all/vendorlist', 'All_Vendor')->name('all.vendorlist');
-    Route::get('/vendor/details/{id}','VendorDetails')->name('vendor.details');
-    Route::post('/product/search','ProductSearch')->name('product.search');
-    Route::post('/search-product' , 'SearchProduct');
-    Route::get('product/details/{id}/{slug}','ProductDetails'); 
+    Route::get('/vendor/details/{id}', 'VendorDetails')->name('vendor.details');
+    Route::post('/product/search', 'ProductSearch')->name('product.search');
+    Route::post('/search-product', 'SearchProduct');
+    Route::get('product/details/{id}/{slug}', 'ProductDetails');
     Route::get('/product/category/{id}/{slug}', 'CatWiseProduct');
     Route::get('/product/subcategory/{id}/{slug}', 'SubCatWiseProduct');
+    Route::get('/product/view/modal/{id}', 'ProductViewAjax');
 });
 
 //////////////////////////////////////////////////////User routes//////////////////////////////////////
@@ -160,19 +161,18 @@ Route::middleware('auth', 'role:admin')->controller(ProductController::class)->g
 Route::middleware('auth', 'role:vendor')->controller(VendorProductController::class)->prefix('/vendor')->group(function () {
     Route::get('/all/product', 'AllProduct')->name('vendor.all.product');
     Route::get('/add/product', 'AddProduct')->name('vendor.add.product');
-    Route::get('/subcategory/ajax/{category_id}' , 'VendorGetSubCategory');
+    Route::get('/subcategory/ajax/{category_id}', 'VendorGetSubCategory');
     Route::post('/store/product', 'StoreProduct')->name('vendor.store.product');
     Route::get('/product/inactive/{id}', 'ProductInactive')->name('vendor.product.inactive');
     Route::get('/product/active/{id}', 'ProductActive')->name('vendor.product.active');
     Route::get('/delete/product/{id}', 'ProductDelete')->name('vendor.delete.product');
-    
+
     Route::get('/edit/product/{id}', 'EditProduct')->name('vendor.edit.product');
     Route::post('/update/product', 'UpdateProduct')->name('vendor.update.product');
     Route::post('/update/product/thambnail', 'UpdateProductThambnail')->name('vendor.update.product.thambnail');
     Route::post('/update/product/multiimage', 'UpdateProductMultiimage')->name('vendor.update.product.multiimage');
     Route::get('/product/multiimg/delete/{id}', 'MulitImageDelelte')->name('vendor.product.multiimg.delete');
 });
-
 
 Route::middleware('auth', 'role:admin')->controller(CuponController::class)->group(function () {
     Route::get('/all/cupon', 'index')->name('all.cupon');
