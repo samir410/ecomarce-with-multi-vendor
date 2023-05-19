@@ -12,6 +12,7 @@ use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\WishlistController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Support\Facades\Route;
 
@@ -181,6 +182,15 @@ Route::middleware('auth', 'role:admin')->controller(CuponController::class)->gro
     Route::get('/edit/cupon/{id}', 'edit')->name('edit.cupon');
     Route::post('/update/cupon', 'update')->name('update.cupon');
     Route::get('/delete/cupon/{id}', 'destroy')->name('delete.cupon');
+});
+Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishList']);
+
+
+Route::controller(WishlistController::class)->group(function () {
+    Route::get('/wishlist' , 'AllWishlist')->name('wishlist');
+    Route::get('/get-wishlist-product' , 'GetWishlistProduct');
+    Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
+  
 });
 
 require __DIR__.'/auth.php';
