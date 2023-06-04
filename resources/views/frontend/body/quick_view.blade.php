@@ -1,7 +1,7 @@
 <div class="modal fade custom-modal" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeModal"></button>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
@@ -14,17 +14,13 @@
                                 </figure>
                      
                             </div>
-                            <!-- THUMBNAILS -->
-                            {{-- <div class="slider-nav-thumbnails">
-                                <div><img src="{{ asset('frontend/assets/imgs/shop/thumbnail-3.jpg') }}" alt="product image" /></div>
-                                
-                            </div> --}}
+                   
                         </div>
                         <!-- End Gallery -->
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="detail-info pr-30 pl-30">
-                            <span class="stock-status out-stock"> Sale Off </span>
+                   
                             <h5 class="title-detail"><a href=" " class="text-heading" id="pname"> </a></h5>
                             <div class="product-detail-rating">
                                 <div class="product-rate-cover text-end">
@@ -54,10 +50,13 @@
 
                             <div class="clearfix product-price-cover">
                                 <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand" id="pprice">$</span>
-                                    <span> 
-                                        <span class="old-price font-md ml-15" id="oldprice">$ </span>
-                                    </span>
+                                    <span class="current-price text-brand" >$</span>
+                                    <span class="current-price text-brand" id="pprice"></span>
+                                    <br>
+                                 
+                                        <span class="old-price font-md ml-15" >$ </span>
+                                        <span class="old-price font-md ml-15" id="oldprice"> </span>
+                                   
                                 </div>
                             </div>
                             <div class="detail-extralink mb-30">
@@ -67,7 +66,9 @@
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
                                 <div class="product-extra-link2">
+                                   <input type="hidden" id="product_id">
                                     <button type="submit" class="button button-add-to-cart" onclick="addToCart()"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                    <meta name="csrf-token" content="{{ csrf_token() }}">
                                 </div>
                             </div>
                             <div class="font-xs">

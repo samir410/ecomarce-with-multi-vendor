@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '3b21bcf4454d86f3874311c3f69842b637d7b493',
+        'reference' => '6ba17ffcc1799bfae203cb39845d86944f7e7dda',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -17,6 +17,15 @@
             'install_path' => __DIR__ . '/../brick/math',
             'aliases' => array(),
             'reference' => '459f2781e1a08d52ee56b0b1444086e038561e3f',
+            'dev_requirement' => false,
+        ),
+        'bumbummen99/shoppingcart' => array(
+            'pretty_version' => '4.2.0',
+            'version' => '4.2.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bumbummen99/shoppingcart',
+            'aliases' => array(),
+            'reference' => '1c50fb564826b6ee748d2d9afad7447b6884166e',
             'dev_requirement' => false,
         ),
         'cordoval/hamcrest-php' => array(
@@ -406,7 +415,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '3b21bcf4454d86f3874311c3f69842b637d7b493',
+            'reference' => '6ba17ffcc1799bfae203cb39845d86944f7e7dda',
             'dev_requirement' => false,
         ),
         'laravel/pint' => array(

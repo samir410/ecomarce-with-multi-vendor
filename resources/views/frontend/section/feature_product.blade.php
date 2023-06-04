@@ -79,7 +79,7 @@ $featured = App\Models\Product::where('featured',1)->orderBy('id','DESC')->limit
                                             </div>
                         
                                         </div>
-                                        <a href="shop-cart.html" class="btn w-100 hover-up"><i class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
+                                        <a onclick="addToCart()" class="btn w-100 hover-up"><i class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
                                     </div>
                                 </div>
                                     

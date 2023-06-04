@@ -1,7 +1,7 @@
 
 @extends('frontend.master_dashboard')
 @section('title')
-Nest - Multipurpose eCommerce HTML Template
+Samir Ecomarce
 @endsection
 @section('main')
 

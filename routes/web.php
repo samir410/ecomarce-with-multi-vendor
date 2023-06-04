@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SliderBannerController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -192,5 +193,21 @@ Route::controller(WishlistController::class)->group(function () {
     Route::get('/wishlist-remove/{id}' , 'WishlistRemove');
   
 });
+
+Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
+Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
+/// Add to cart store data For Product Details Page 
+Route::post('/dcart/data/store/{id}', [CartController::class, 'AddToCartDetails']);
+
+Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart' , 'MyCart')->name('mycart');
+    Route::get('/get-cart-product' , 'GetCartProduct');
+    Route::get('/cart-remove/{rowId}' , 'CartRemove');
+    Route::get('/cart-increment/{rowId}' , 'CartIncrement');
+    Route::get('/cart-decrement/{rowId}' , 'CartDecrement');
+
+
+}); 
 
 require __DIR__.'/auth.php';
